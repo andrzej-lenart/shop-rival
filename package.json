@@ -4,12 +4,15 @@
   "description": "Shop template",
   "scripts": {
     "prestart": "babel-node ./tools/startMessage.js",
-    "start" : "npm-run-all --parallel open:src lint:watch test:watch",
+    "start": "npm-run-all --parallel start-mockapi open:src lint:watch test:watch",
     "open:src": "babel-node ./tools/srcServer.js",
     "lint": "node_modules/.bin/esw webpack.config.* src tools",
-    "lint:watch" : "npm run lint -- --watch",
+    "lint:watch": "npm run lint -- --watch",
     "test": "mocha --reporter progress tools/testSetup.js \"src/**/*.test.js\"",
-    "test:watch" : "npm run test -- --watch"
+    "test:watch": "npm run test -- --watch",
+    "generate-mock-data": "babel-node api/generateMockData",
+    "prestart-mockapi": "npm run generate-mock-data",
+    "start-mockapi": "json-server --watch api/db.json --port 3003"
   },
   "author": "Andrzej Lenart",
   "license": "MIT",
@@ -35,6 +38,7 @@
     "babel-preset-react": "6.5.0",
     "babel-preset-react-hmre": "1.1.1",
     "babel-register": "6.8.0",
+    "chalk": "^1.1.3",
     "cheerio": "0.22.0",
     "colors": "1.1.2",
     "compression": "1.6.1",
@@ -50,7 +54,9 @@
     "express": "4.13.4",
     "extract-text-webpack-plugin": "1.0.1",
     "file-loader": "0.8.5",
+    "fs": "0.0.1-security",
     "jsdom": "8.5.0",
+    "json-schema-faker": "^0.4.0",
     "mocha": "2.4.5",
     "nock": "8.0.0",
     "npm-run-all": "1.8.0",
@@ -63,7 +69,8 @@
     "url-loader": "0.5.7",
     "webpack": "1.13.0",
     "webpack-dev-middleware": "1.6.1",
-    "webpack-hot-middleware": "2.10.0"
+    "webpack-hot-middleware": "2.10.0",
+    "whatwg-fetch": "^2.0.3"
   },
   "repository": {
     "type": "git",

@@ -1,11 +1,13 @@
 import React from 'react';
 import {Route, IndexRoute} from 'react-router';
 import App from './components/App';
-import HomePage from './components/HomePage';
+import HomePage from './components/home/HomePage';
+import ShopPage from './components/shop/ShopPage';
 
 export default (
     <Route path="/" component={App}>
         <IndexRoute component={HomePage} />
+        <Route path="products(/:pageNo)" component={ShopPage} />
     </Route>
 );
 
